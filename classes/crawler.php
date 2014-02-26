@@ -5,7 +5,6 @@
 	 * Autor   : Cláudio Henrique
 	 * e-mail  : claudiohenriquedev@gmail.com
 	 * Version : 0.1
-	 * 	
 	*/
 	
 	header('Content-Type: text/html; charset=utf-8');
@@ -22,23 +21,29 @@
 		}
 		
 		private function buscarClassificacao(){
+			
 			//Metodo responsavel por buscar a classificação atual.
 			$html = file_get_html($this->url);
 			
+			//Retorna a Classificação é todas as informações (Pontos,Jogos,Empates, e.t.c)
 			foreach($html->find('tr.another-team') as $possicao){
 				$this->class .= $possicao->plaintext .'<br>';
 			}
 			
+			//Coloca as informações dentro de um array
 			$this->class = explode('<br>',$this->class);
 			
+			//Coloca tudo dentro de uma váriavel
 			for($i = 0; $i < sizeof($this->class); $i++){
 				$this->clear .= $this->class[$i];
 			}
 			
+			//Transforma essa váriavel em um Array
 			$this->clear = explode(' ',$this->clear);
 			
+			//Limpa o Array, eliminando campos nulos ou vázios.
 			$arrayLimpo = array_filter($this->clear);
-			echo end($arrayLimpo);
+
 			//print_r($this->ordenarArray($arrayLimpo,$tamanho));
 		}
 		
