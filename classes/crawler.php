@@ -1,6 +1,7 @@
 <?php
 
-	/* Classe responsavel por recuperar as informações da classificação do Brasileirão
+	/* Classe responsavel por recuperar as informações da classificação do 
+	 * Campeonato Brasileiro(Brasileirao)
 	 * O Crawler ainda não foi finalizado.
 	 * Autor   : Cláudio Henrique
 	 * e-mail  : claudiohenriquedev@gmail.com
@@ -15,19 +16,20 @@
 		private $url = 'http://placar.abril.com.br/campeonato/brasileirao';
 		private $class;
 		private $clear;
+		private $novoArray;
 		
 		public function __construct(){
 					$this->buscarClassificacao();
 		}
 		
+		//Metodo responsavel por buscar a classificação atual.
 		private function buscarClassificacao(){
 			
-			//Metodo responsavel por buscar a classificação atual.
 			$html = file_get_html($this->url);
 			
 			//Retorna a Classificação é todas as informações (Pontos,Jogos,Empates, e.t.c)
-			foreach($html->find('tr.another-team') as $possicao){
-				$this->class .= $possicao->plaintext .'<br>';
+			foreach($html->find('tr.another-team') as $class){
+				$this->class .= $class->plaintext .'<br>';
 			}
 			
 			//Coloca as informações dentro de um array
@@ -44,17 +46,27 @@
 			//Limpa o Array, eliminando campos nulos ou vázios.
 			$arrayLimpo = array_filter($this->clear);
 
-			//print_r($this->ordenarArray($arrayLimpo,$tamanho));
+			//Coloca o Array ordenado em uma nova variavel
+			$retornoArray = $this->ordenarArray($arrayLimpo);
+			
+			$retornaArray = explode('<br>',$retornoArray);
+			
 		}
 		
-		private function ordenarArray($array,$tamanho){
+		private function ordenarArray($array){
+			$ultimaPossicao = 0;
 			$contador = 0;
+
+			foreach($array as $indice => $valor){
+				$ultimaPossicao =  $indice;
+			}
 			
-			for($i = 0; $i < $tamanho; $i++){
-				if(array_key_exists($i,$array)){
-					echo 'Existe'.$i.'<br>';
+			for($i = 0; $i < $ultimaPossicao; $i++){
+				if(!empty($array[$i])){
+					$this->novoArray .= $array[$i].'<br>';
 				}
 			}
+			return $this->novoArray;
 		}
 	}
 ?>
