@@ -18,8 +18,9 @@
 		private $clear;
 		private $novoArray;
 		
-		public function __construct(){
-					$this->buscarClassificacao();
+		public function __construct()
+		{
+			$this->buscarClassificacao();
 		}
 		
 		//Metodo responsavel por buscar a classificação atual.
@@ -54,17 +55,18 @@
 		}
 		
 		private function ordenarArray($array){
+			//Declaração e inicialização das variaveis. 
 			$ultimaPossicao = 0;
 			$contador = 0;
-
+			
+			//Recupera o ultimo indice do array
 			foreach($array as $indice => $valor){
-				$ultimaPossicao =  $indice;
+				$ultimaPossicao = $indice;
 			}
 			
 			for($i = 0; $i < $ultimaPossicao; $i++){
-				if(!empty($array[$i])){
+				if(!empty($array[$i]))
 					$this->novoArray .= $array[$i].'<br>';
-				}
 			}
 			return $this->novoArray;
 		}
