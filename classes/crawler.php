@@ -10,6 +10,7 @@
 	
 	header('Content-Type: text/html; charset=utf-8');
 	require_once 'simple_html_dom.php';
+	require_once 'Xml.php';
 	
 	class Crawler{
 		
@@ -17,6 +18,7 @@
 		private $class;
 		private $clear;
 		private $novoArray;
+		private $xml;
 		
 		public function __construct()
 		{
@@ -50,8 +52,14 @@
 			//Coloca o Array ordenado em uma nova variavel
 			$retornoArray = $this->ordenarArray($arrayLimpo);
 			
+			//Transforma a váriavel de uma String para um Array [String to Array]
 			$retornaArray = explode('<br>',$retornoArray);
 			
+			$x = $this->unirNomes($retornaArray);
+			
+			echo '<pre>';
+			print_r($x);
+			echo '</pre>';
 		}
 		
 		private function ordenarArray($array){
@@ -70,5 +78,27 @@
 			}
 			return $this->novoArray;
 		}
+		
+		/*
+		 * Pode ser até um pouco estranho explicar, porem quando eu faço um explode na linha 56
+		 * Nomes compostos como 'São Paulo' ou 'Ponte Preta' acabam quebrando e ficando semparados
+		 * ou seja na possição fica [0] => São e na [1] => Paulo, entendeu? 
+		*/
+		
+		private function unirNomes($array){
+			for($i = 0; $i <= sizeof($array)-1; $i++){
+				if(strcmp($array[$i],'Paulo') == 0){
+					$anterior = $i - 1;
+					$array[$i] = $array[$anterior] . ' '.$array[$i];
+					unset($array[$anterior]);
+				}else if(strcmp($array[$i],'Preta') == 0){
+					$anterior = $i - 1;
+					$array[$i] = $array[$anterior] . ' '.$array[$i];
+					unset($array[$anterior]);
+				}
+			}
+			return $array;
+		}
+	
 	}
 ?>
