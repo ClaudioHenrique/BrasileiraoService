@@ -12,7 +12,7 @@
 	require_once 'simple_html_dom.php';
 	require_once 'Xml.php';
 	
-	class Crawler {
+	class CrawlerPlacar {
 		
 		private $url = 'http://placar.abril.com.br/campeonato/brasileirao';
 		private $class;
