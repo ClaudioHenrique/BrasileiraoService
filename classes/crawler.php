@@ -12,7 +12,7 @@
 	require_once 'simple_html_dom.php';
 	require_once 'Xml.php';
 	
-	class Crawler{
+	class Crawler {
 		
 		private $url = 'http://placar.abril.com.br/campeonato/brasileirao';
 		private $class;
@@ -81,8 +81,9 @@
 		
 		/*
 		 * Pode ser até um pouco estranho explicar, porem quando eu faço um explode na linha 56
-		 * Nomes compostos como 'São Paulo' ou 'Ponte Preta' acabam quebrando e ficando semparados
+		 * Nomes compostos como 'São Paulo' ou 'Ponte Preta' acabam quebrando e ficando separados
 		 * ou seja na possição fica [0] => São e na [1] => Paulo, entendeu? 
+		 * Preisamos do metodo unirNomes para essa finalidade.
 		*/
 		
 		private function unirNomes($array){
