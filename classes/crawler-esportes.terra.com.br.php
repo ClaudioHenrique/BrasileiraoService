@@ -20,6 +20,7 @@
 				}
 			}
 			
+			
 			$this->cont = explode('<br>',$this->cont);
 			echo '<pre>';
 			print_r($this->cont);
