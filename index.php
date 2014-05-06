@@ -1,6 +1,4 @@
 <?php
-	require_once 'classes/crawler.php';
-	require_once 'classes/crawler-esportes.terra.com.br.php';
-	
-	$c = new CrawlerEsportesTerra();
+	require_once 'classes/crawler-placar.com.br.php';
+	$c = new CrawlerPlacar();
 ?>
